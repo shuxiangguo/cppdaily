@@ -297,6 +297,47 @@ namespace upper_bound {
         cout << "the upper bound value is: " << *it << endl;
     }
 }
+
+#include <algorithm>
+namespace leetcode {
+    string reverseVowels(string s) {
+        vector<char> vec {'a', 'e', 'i', 'o', 'u'};
+        if (s.size() > 0) {
+            auto first = s.begin();
+            auto last = s.end() - 1;
+            while (first < last) {
+                while (first < last && find(vec.begin(), vec.end(), tolower(*first)) == vec.end()) {
+                    first++;
+                }
+
+                while (first < last && find(vec.begin(), vec.end(), tolower(*last)) == vec.end()) {
+                    last--;
+                }
+                swap(*first, *last);
+                first++;
+                last--;
+            }
+        }
+        string str = "";
+        for (auto& x : s) {
+            str += x;
+        }
+        return str;
+    }
+
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        std::sort(nums1.begin(), nums1.end());
+        std::sort(nums2.begin(), nums2.end());
+        vector<int> v(nums1.size());
+        auto it = std::set_intersection(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), v.begin());
+        v.resize(it - v.begin());
+        it = std::unique(v.begin(), v.end());
+        v.resize(it - v.begin());
+        return v;
+    }
+}
+
+
 int main() {
 //    std::cout << "Hello, World!" << std::endl;
 //    partition::test_partition();
@@ -317,6 +358,14 @@ int main() {
 //    partition::test_stable_partition();
 //    unique::test_unique();
 //    unique::test_unique_copy();
-    upper_bound::test_upper_bound();
+//    upper_bound::test_upper_bound();
+//    cout << leetcode::reverseVowels("hello") << endl;
+
+    vector<int> v1 {4,9,5}, v2 {9,4,9,8,4};
+    vector<int> res = leetcode::intersection(v1, v2);
+    for (auto& x : res) {
+        cout << x << " ";
+    }
+    cout << endl;
     return 0;
 }
