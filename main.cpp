@@ -299,6 +299,8 @@ namespace upper_bound {
 }
 
 #include <algorithm>
+#include <set>
+using namespace std;
 namespace leetcode {
     string reverseVowels(string s) {
         vector<char> vec {'a', 'e', 'i', 'o', 'u'};
@@ -325,6 +327,7 @@ namespace leetcode {
         return str;
     }
 
+
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         std::sort(nums1.begin(), nums1.end());
         std::sort(nums2.begin(), nums2.end());
@@ -335,7 +338,22 @@ namespace leetcode {
         v.resize(it - v.begin());
         return v;
     }
+
+    int findKthMaxNum(vector<int> vec, int K) {
+        std::set<int> myset;
+        for (auto& num : vec) {
+            myset.insert(num);
+            if (myset.size() > K) {
+                myset.erase(*myset.begin());
+            }
+        }
+        if (myset.size() < K) {
+            return *myset.rbegin();
+        } else return *myset.begin();
+    }
 }
+
+
 
 
 int main() {
@@ -361,11 +379,13 @@ int main() {
 //    upper_bound::test_upper_bound();
 //    cout << leetcode::reverseVowels("hello") << endl;
 
-    vector<int> v1 {4,9,5}, v2 {9,4,9,8,4};
-    vector<int> res = leetcode::intersection(v1, v2);
-    for (auto& x : res) {
-        cout << x << " ";
-    }
-    cout << endl;
+//    vector<int> v1 {4,9,5}, v2 {9,4,9,8,4};
+//    vector<int> res = leetcode::intersection(v1, v2);
+//    for (auto& x : res) {
+//        cout << x << " ";
+//    }
+//    cout << endl;
+
+    cout << leetcode::findKthMaxNum(vector<int> {1,2,3,4,5,6,7,8,9}, 5) << endl;
     return 0;
 }
