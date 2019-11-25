@@ -351,6 +351,36 @@ namespace leetcode {
             return *myset.rbegin();
         } else return *myset.begin();
     }
+
+    // leetcode 482 秘钥格式化
+    string licenseKeyFormatting(string S, int K) {
+        reverse(S.begin(), S.end());
+        auto it = remove_if(S.begin(), S.end(), [](char ch) {return ch == '-';});
+        S.resize(it - S.begin());
+        for (auto s : S) {
+            cout << s;
+        }
+        cout << endl;
+        string res = "";
+        int i = 0;
+        for (; i < S.size()-1;) {
+            for (int j = 0; j < K && i < S.size(); j++) {
+                res += S.at(i);
+                i++;
+            }
+            if (i+1 < S.size()) {
+                res += '-';
+            }
+        }
+        if (i <= S.size() - 1) {
+            res += '-';
+        }
+        for (; i <= S.size()-1; i++) {
+            res += S.at(i);
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
 }
 
 
@@ -386,6 +416,8 @@ int main() {
 //    }
 //    cout << endl;
 
-    cout << leetcode::findKthMaxNum(vector<int> {1,2,3,4,5,6,7,8,9}, 5) << endl;
+//    cout << leetcode::findKthMaxNum(vector<int> {1,2,3,4,5,6,7,8,9}, 5) << endl;
+    cout << leetcode::licenseKeyFormatting("2-4A0r7-4k", 3) << endl;
     return 0;
+
 }
