@@ -405,12 +405,40 @@ namespace leetcode {
         }
         return res;
     }
+
+    // LeetCode496 下一个更大元素
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> res;
+        for (auto& num1 : nums1) {
+            auto it = find(nums2.begin(), nums2.end(), num1);
+            it++;
+            while (it != nums2.end()) {
+                if (*it > num1) {
+                    res.push_back(*it);
+                    break;
+                } else {
+                    it++;
+                }
+            }
+            if (it == nums2.end()) {
+                res.push_back(-1);
+            }
+        }
+        return res;
+    }
 }
 
 
 
 
 int main() {
+    vector<int> nums1 = {4,1,2};
+    vector<int> nums2 = {1,3,4,2};
+    vector<int> res = leetcode::nextGreaterElement(nums1, nums2);
+    for (auto& x : res) {
+        cout << x << " ";
+    }
+    cout << endl;
 //    std::cout << "Hello, World!" << std::endl;
 //    partition::test_partition();
 //    partition::test_partition_copy();
@@ -442,11 +470,11 @@ int main() {
 
 //    cout << leetcode::findKthMaxNum(vector<int> {1,2,3,4,5,6,7,8,9}, 5) << endl;
 //    cout << leetcode::licenseKeyFormatting("2-4A0r7-4k", 3) << endl;
-    vector<int> res = leetcode::constructRectangle(4);
-    for (auto x : res) {
-        cout << x << " ";
-    }
-    cout << endl;
+//    vector<int> res = leetcode::constructRectangle(4);
+//    for (auto x : res) {
+//        cout << x << " ";
+//    }
+//    cout << endl;
     return 0;
 
 }
