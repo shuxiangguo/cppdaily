@@ -381,6 +381,30 @@ namespace leetcode {
         reverse(res.begin(), res.end());
         return res;
     }
+
+    // leetcode 492 构造矩形
+
+#include <climits>
+    vector<int> constructRectangle(int area) {
+        vector<int> res;
+        int min = INT_MAX;
+        for (int i = 1, j = area; i <= j;) {
+            if (i * j == area) {
+                if (j - i < min) {
+                    res.clear();
+                    res.push_back(i);
+                    res.push_back(j);
+                    i++;
+                    j--;
+                }
+            } else if (i * j < area) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return res;
+    }
 }
 
 
@@ -417,7 +441,12 @@ int main() {
 //    cout << endl;
 
 //    cout << leetcode::findKthMaxNum(vector<int> {1,2,3,4,5,6,7,8,9}, 5) << endl;
-    cout << leetcode::licenseKeyFormatting("2-4A0r7-4k", 3) << endl;
+//    cout << leetcode::licenseKeyFormatting("2-4A0r7-4k", 3) << endl;
+    vector<int> res = leetcode::constructRectangle(4);
+    for (auto x : res) {
+        cout << x << " ";
+    }
+    cout << endl;
     return 0;
 
 }
