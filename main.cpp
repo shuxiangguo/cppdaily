@@ -426,19 +426,45 @@ namespace leetcode {
         }
         return res;
     }
+
+    // leetcode 500 键盘
+    vector<string> findWords(vector<string>& words) {
+        vector<string> container;
+        container.push_back("qwertyuiop");
+        container.push_back("asdfghjkl");
+        container.push_back("zxcvbnm");
+        vector<string> res;
+        if (words.size() == 0) return res;
+
+        for (auto word : words) {
+            transform(word.begin(), word.end(), word.begin(), ::tolower);
+            auto it = find(container.begin(), container.end(), word);
+            if (it != container.end()) {
+                res.push_back(word);
+            }
+        }
+        return res;
+    }
 }
 
 
 
 
 int main() {
-    vector<int> nums1 = {4,1,2};
-    vector<int> nums2 = {1,3,4,2};
-    vector<int> res = leetcode::nextGreaterElement(nums1, nums2);
-    for (auto& x : res) {
-        cout << x << " ";
+
+    vector<string> input = {"Hello", "Alaska", "Dad", "Peace"};
+    vector<string> res = leetcode::findWords(input);
+    for (auto& str : res) {
+        cout << str << " ";
     }
     cout << endl;
+//    vector<int> nums1 = {4,1,2};
+//    vector<int> nums2 = {1,3,4,2};
+//    vector<int> res = leetcode::nextGreaterElement(nums1, nums2);
+//    for (auto& x : res) {
+//        cout << x << " ";
+//    }
+//    cout << endl;
 //    std::cout << "Hello, World!" << std::endl;
 //    partition::test_partition();
 //    partition::test_partition_copy();
