@@ -445,19 +445,33 @@ namespace leetcode {
         }
         return res;
     }
+
+    // 520 检测大写字母
+    bool detectCapitalUse(string word) {
+        if (word.size() == 1) return true;
+        int size = count_if(word.begin(), word.end(), [](char ch) {return ch >= 'a' && ch <= 'z';});
+        if (size == word.size()) return true;
+        size = count_if(word.begin(), word.end(), [](char ch) {return ch >= 'A' && ch <= 'Z';});
+        if (size == word.size()) return true;
+        int len = count_if(word.begin()+1, word.end(), [](char ch) {return ch >= 'a' && ch <= 'z';});
+        if ((word.at(0) >= 'A') && (word.at(0) <= 'Z') && (len == word.size() - 1)) return true;
+        return false;
+    }
 }
 
 
 
 
 int main() {
+    bool res = leetcode::detectCapitalUse("FlaG");
+    cout << res << endl;
 
-    vector<string> input = {"Hello", "Alaska", "Dad", "Peace"};
-    vector<string> res = leetcode::findWords(input);
-    for (auto& str : res) {
-        cout << str << " ";
-    }
-    cout << endl;
+//    vector<string> input = {"Hello", "Alaska", "Dad", "Peace"};
+//    vector<string> res = leetcode::findWords(input);
+//    for (auto& str : res) {
+//        cout << str << " ";
+//    }
+//    cout << endl;
 //    vector<int> nums1 = {4,1,2};
 //    vector<int> nums2 = {1,3,4,2};
 //    vector<int> res = leetcode::nextGreaterElement(nums1, nums2);
