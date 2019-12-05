@@ -457,14 +457,30 @@ namespace leetcode {
         if ((word.at(0) >= 'A') && (word.at(0) <= 'Z') && (len == word.size() - 1)) return true;
         return false;
     }
+
+    // leetcode 551
+    bool checkRecord(string s) {
+        int cnt = count(s.begin(), s.end(), 'A');
+        if (cnt > 1) {
+            return false;
+        } else {
+            if (count(s.begin(), s.end(), 'L') < 3) {
+                return true;
+            } else {
+                return s.find("LLL") == string::npos;
+            }
+        }
+    }
 }
 
 
 
 
 int main() {
-    bool res = leetcode::detectCapitalUse("FlaG");
-    cout << res << endl;
+    bool res = leetcode::checkRecord("PPALLP");
+    cout << boolalpha << res;
+//    bool res = leetcode::detectCapitalUse("FlaG");
+//    cout << res << endl;
 
 //    vector<string> input = {"Hello", "Alaska", "Dad", "Peace"};
 //    vector<string> res = leetcode::findWords(input);
@@ -516,5 +532,4 @@ int main() {
 //    }
 //    cout << endl;
     return 0;
-
 }
