@@ -471,14 +471,37 @@ namespace leetcode {
             }
         }
     }
+
+    // leetcode 605种花问题
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        if (n == 0) return true;
+        int count = 0;
+        for (int i = 0; i < flowerbed.size(); i++) {
+            if (flowerbed[i] == 0) {
+                if ((i == 0 && flowerbed[i+1] == 0) ||
+                ((i == flowerbed.size()-1) && flowerbed[i-1] == 0) ||
+                (flowerbed[i-1] == 0 && flowerbed[i+1] == 0)) {
+                    flowerbed[i] = 1;
+                    count += 1;
+                    if (count >= n) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
 
 
 
 
 int main() {
-    bool res = leetcode::checkRecord("PPALLP");
-    cout << boolalpha << res;
+    vector<int> vec = {1,0,0,0,0,0,1};
+    bool res = leetcode::canPlaceFlowers(vec, 2);
+    cout << res << endl;
+//    bool res = leetcode::checkRecord("PPALLP");
+//    cout << boolalpha << res;
 //    bool res = leetcode::detectCapitalUse("FlaG");
 //    cout << res << endl;
 
